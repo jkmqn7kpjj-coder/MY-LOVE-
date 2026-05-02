@@ -1,25 +1,72 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Surprise!</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surprise! ❤️</title>
     <style>
-        body { background: #ffb6c1; text-align: center; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; font-family: sans-serif; overflow: hidden; }
-        button { padding: 10px 20px; font-size: 18px; margin: 10px; border-radius: 8px; border: none; cursor: pointer; }
-        #noBtn { position: absolute; background: red; color: white; }
-        #yesBtn { background: green; color: white; }
+        body { background-color: #ffb6c1; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; font-family: sans-serif; overflow: hidden; text-align: center; transition: 0.3s; }
+        .container { position: relative; width: 100%; }
+        h1 { color: #d63384; font-size: 24px; margin: 10px; }
+        img { width: 180px; height: 180px; object-fit: contain; border-radius: 20px; }
+        .buttons { display: flex; justify-content: center; gap: 20px; margin-top: 20px; }
+        button { padding: 12px 25px; font-size: 18px; border: none; border-radius: 12px; cursor: pointer; font-weight: bold; transition: 0.1s; }
+        #yesBtn { background-color: #4CAF50; color: white; }
+        #noBtn { background-color: #f44336; color: white; position: absolute; }
+        .hidden { display: none; }
     </style>
 </head>
 <body>
-    <h1>Do you love me? ❤️</h1>
-    <button id="yesBtn" onclick="alert('I knew it! ❤️')">Yes</button>
-    <button id="noBtn" onmouseover="move()">No</button>
+
+    <div id="main-card">
+        <!-- Ye sticker change hota rahega -->
+        <img id="main-sticker" src="https://media.tenor.com/9v6T5S2A3vAAAAAi/milk-and-mocha.gif">
+        <h1 id="question">Do you love me? ❤️</h1>
+        <div class="buttons">
+            <button id="yesBtn">Yes</button>
+            <button id="noBtn">No</button>
+        </div>
+    </div>
+
+    <div id="success-screen" class="hidden">
+        <img src="https://media.tenor.com/gU_69h56Y3IAAAAi/mochi-cat.gif">
+        <h1 style="color: white;">I knew it! You Love me a lot! 💖✨</h1>
+    </div>
 
     <script>
-        function move() {
-            const btn = document.getElementById('noBtn');
-            btn.style.left = Math.random() * (window.innerWidth - 100) + 'px';
-            btn.style.top = Math.random() * (window.innerHeight - 50) + 'px';
-        }
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const mainSticker = document.getElementById('main-sticker');
+        const mainCard = document.getElementById('main-card');
+        const successScreen = document.getElementById('success-screen');
+
+        // Sad stickers ki list
+        const sadStickers = [
+            "https://media.tenor.com/0796_Z_S_8IAAAAi/milk-and-mocha-sad.gif",
+            "https://media.tenor.com/T_7k6_v_U_AAAAAi/milk-and-mocha.gif",
+            "https://media.tenor.com/6X2f7_f_9_AAAAAi/milk-and-mocha-cry.gif"
+        ];
+
+        const moveAndSad = () => {
+            // Button bhagao
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+
+            // Sticker change karo sad wala
+            const randomSad = sadStickers[Math.floor(Math.random() * sadStickers.length)];
+            mainSticker.src = randomSad;
+        };
+
+        noBtn.addEventListener('mouseover', moveAndSad);
+        noBtn.addEventListener('touchstart', moveAndSad); // iPhone XS ke liye zaroori
+
+        yesBtn.addEventListener('click', () => {
+            mainCard.classList.add('hidden');
+            successScreen.classList.remove('hidden');
+            document.body.style.backgroundColor = "#ff85a2";
+        });
     </script>
 </body>
 </html>
