@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Surprise!</title>
+    <style>
+        body { background: #ffb6c1; text-align: center; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; font-family: sans-serif; overflow: hidden; }
+        button { padding: 10px 20px; font-size: 18px; margin: 10px; border-radius: 8px; border: none; cursor: pointer; }
+        #noBtn { position: absolute; background: red; color: white; }
+        #yesBtn { background: green; color: white; }
+    </style>
+</head>
+<body>
+    <h1>Do you love me? ❤️</h1>
+    <button id="yesBtn" onclick="alert('I knew it! ❤️')">Yes</button>
+    <button id="noBtn" onmouseover="move()">No</button>
+
+    <script>
+        function move() {
+            const btn = document.getElementById('noBtn');
+            btn.style.left = Math.random() * (window.innerWidth - 100) + 'px';
+            btn.style.top = Math.random() * (window.innerHeight - 50) + 'px';
+        }
+    </script>
+</body>
+</html>
